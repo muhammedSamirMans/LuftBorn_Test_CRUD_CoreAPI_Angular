@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddEditNotepadComponent } from './edit-notepad.component';
+import { EditNotepadComponent } from './edit-notepad.component';
 
 describe('AddEditNotepadComponent', () => {
-  let component: AddEditNotepadComponent;
-  let fixture: ComponentFixture<AddEditNotepadComponent>;
+  let component: EditNotepadComponent;
+  let fixture: ComponentFixture<EditNotepadComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddEditNotepadComponent ]
+      declarations: [ EditNotepadComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AddEditNotepadComponent);
+    fixture = TestBed.createComponent(EditNotepadComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

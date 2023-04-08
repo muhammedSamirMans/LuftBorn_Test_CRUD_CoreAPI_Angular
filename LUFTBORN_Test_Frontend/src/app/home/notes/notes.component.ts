@@ -63,16 +63,5 @@ editNote(note:any)
     this.NotepadService.ACTION$.next('add')
     this.NotepadService.DATA$.next({id:0,title:'',date:this.DatePipe.transform(new Date(),'MMM d, y'),describtion:''})
     this.router.navigate(['/edit-note'])
-    }
-
-    // searchfun(){
-    //   if(this.search.length>0){
-    //     this.notelist=this.notelist.filter(note=>{
-    //       return note.title.toUpperCase().includes(this.search.toUpperCase())
-    //     })
-    //   }
-    //   else{
-    //     this.notelist=this.NotepadService.getnotes()
-    //   }
-    // }
+    } 
 }
