@@ -27,20 +27,28 @@ export class EditNotepadComponent {
    }
   submit(){    
     if(this.action=='add'){
-     this.NotepadService.addnotes(this.noteForm.value).subscribe(res=>{
-      console.log(res); 
-     })
-      this.notifier.notify('success', 'Add Sucessfully');
-      this.router.navigate(['/notes'])
+     this.NotepadService.addnotes(this.noteForm.value).subscribe((res:any)=>{
+      if(res.status == 200)
+      { 
+        this.notifier.notify('success', "Added Succefully");
+        this.router.navigate(['/notes']);
+      }
+      else
+        this.notifier.notify('error', res.message);
+     });
     }
     if(this.action=='edit'){
       let index:number=0
       this.NotepadService.EDIT$.subscribe((data:number)=>index=data)
-      this.NotepadService.editnotes(this.noteForm.value).subscribe(res=>{
-        console.log(res); 
-       })
-      this.notifier.notify('success', 'Edit Sucessfully');
-      this.router.navigate(['/notes'])
+      this.NotepadService.editnotes(this.noteForm.value).subscribe((res:any)=>{
+        if(res.status == 200)
+        {
+          this.notifier.notify('success', "Edit Succefully"); 
+          this.router.navigate(['/notes']);
+        }
+        else
+          this.notifier.notify('error', res.message);
+       });
     }
 
   }

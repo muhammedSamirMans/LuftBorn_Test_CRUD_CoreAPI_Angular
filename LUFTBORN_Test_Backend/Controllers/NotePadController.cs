@@ -17,32 +17,116 @@ namespace LUFTBORN_Test_Backend.Controllers
         [HttpGet]
         [Route("GetAll")]
         public IActionResult GetAll()
-        { 
-            return Ok(notePadService.GetAll());
+        {
+            List<NotePad> notePads = new List<NotePad>();
+            try
+            {
+                notePads = notePadService.GetAll();
+                return Ok(new 
+                { 
+                    Status = 200,
+                    Message = "Success",
+                    Response =  new {notePads} 
+                });
+            }
+            catch
+            {
+                return Ok(new
+                {
+                    Status = 500,
+                    Message = "Server Error",
+                    Response = new { notePads }
+                });
+            }
+           
         }
         [HttpPost]
         [Route("GetById")]
         public IActionResult GetById([FromBody] int id)
         {
-            return Ok(notePadService.GetById(id));
+            NotePad notePad = new NotePad();
+            try
+            {
+                notePad = notePadService.GetById(id);
+                return Ok(new
+                {
+                    Status = 200,
+                    Message = "Success",
+                    Response = new { notePad }
+                });
+            }
+            catch
+            {
+                return Ok(new
+                {
+                    Status = 500,
+                    Message = "Server Error",
+                    Response = new { notePad }
+                });
+            } 
         }
         [HttpPost]
         [Route("Create")]
         public IActionResult Create([FromBody] NotePad notePad)
         {
-            return Ok(notePadService.Create(notePad));
+            try
+            {
+                if (ModelState.IsValid)
+                    if (notePadService.Create(notePad))
+                        return Ok(new { Status = 200, Message = "Success", Response = new { data = true } });
+                return Ok(new { Status = 403, Message = "Validation Error", Response = new { data = false } });
+            }
+            catch
+            {
+                return Ok(new 
+                {
+                    Status = 500,
+                    Message = "Server Error",
+                    Response = new { data = false }
+                });
+            } 
         }
         [HttpPost]
         [Route("Update")]
         public IActionResult Update([FromBody] NotePad notePad)
         {
-            return Ok(notePadService.Update(notePad));
+            try
+            {
+                if (ModelState.IsValid)
+                    if (notePadService.Update(notePad))
+                        return Ok(new { Status = 200, Message = "Success", Response = new { data = true } });
+                return Ok(new { Status = 403, Message = "Validation Error", Response = new { data = false } });
+            }
+            catch
+            {
+                return Ok(new
+                {
+                    Status = 500,
+                    Message = "Server Error",
+                    Response = new { data = false }
+                });
+            } 
         }
         [HttpPost]
         [Route("Remove")]
         public IActionResult Remove([FromBody] int Id)
         {
-            return Ok(notePadService.Remove(Id));
+            try
+            {
+                if (Id > 0)
+                    if (notePadService.Remove(Id))
+                        return Ok(new { Status = 200, Message = "Success", Response = new { data = true } });
+                return Ok(new { Status = 403, Message = "Validation Error", Response = new { data = false } });
+            }
+            catch
+            {
+                return Ok(new
+                {
+                    Status = 500,
+                    Message = "Server Error",
+                    Response = new { data = false }
+                });
+            } 
         }
     }
 }
