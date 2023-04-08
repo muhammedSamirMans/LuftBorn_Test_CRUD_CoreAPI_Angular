@@ -1,0 +1,36 @@
+<form [formGroup]="noteForm" (ngSubmit)="submit()" class="p-4">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" class="form-control" id="title" formControlName="title">
+          <div *ngIf="noteFormControls?.title?.touched||noteFormControls?.title?.dirty" [ngClass]="'error'">
+            <div *ngIf="noteFormControls?.title?.errors"
+              class="alert py-1 fs-6 text-danger bg-transparent" role="alert">
+              this Filed is Required
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="title" class="form-label">Date</label>
+          <input type="date" class="form-control" id="title" formControlName="date">
+          <div *ngIf="noteFormControls?.date?.touched||noteFormControls?.date?.dirty" [ngClass]="'error'">
+            <div *ngIf="noteFormControls?.date?.errors"
+              class="alert py-1 fs-6 text-danger bg-transparent" role="alert">
+              this Filed is Required
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Describtion</label>
+          <textarea type="text" class="form-control" id="description" rows="10" formControlName="describtion"></textarea>
+          <div *ngIf="noteFormControls?.describtion?.touched||noteFormControls?.describtion?.dirty" [ngClass]="'error'">
+            <div *ngIf="noteFormControls?.describtion?.errors"
+              class="alert py-1 fs-6 text-danger bg-transparent" role="alert">
+              this Filed is Required
+            </div>
+          </div>
+        </div>
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn " *ngIf="action!='show'" [disabled]="!noteForm.valid">Submit</button>
+            <button class="btn " (click)="cancel()">Cancel</button>
+        </div>
+      </form>

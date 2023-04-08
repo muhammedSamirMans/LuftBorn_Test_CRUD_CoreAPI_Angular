@@ -1,0 +1,39 @@
+<div class="main">
+        <div class="d-flex flex-column align-items-center justify-content-center h-100" *ngIf="notelist.length<=0 ; else elseBlock">
+        <div class="d-flex align-items-center justify-content-center gap-2 flex-column">
+            <img src="../../../assets/realx.avif" class="w-75 m-auto">
+            <p class="subtitle text-center">A simple and fast way to keep important ideas in one place</p>
+        </div>
+    </div>
+   
+<ng-template #elseBlock>
+    <div class="search mb-4">
+        <div class="d-flex align-items-center justify-content-between ">
+            <h3>Easy Note</h3>
+            <p>{{day |date}}</p>
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" id="search" placeholder="Find Your Note"  [(ngModel)]="search" >
+          </div>
+    </div>
+    <div class="row">
+        <ng-container *ngFor="let note of notelist| filter: search; index as i" >
+            <div class="bg-light  position-relative col-md-3 col-11 note" >
+                <h6 style="color: black;font-weight: 600;width: 60%;">{{note.title}}</h6>
+                <p style="color: black;" class="text-black-50 fs-6">{{note.date}}</p>
+                <div class="d-flex gap-2">
+                    <i class="fa-regular fa-eye" style="color: #1a1a1a;" (click)="shownote(note)"></i>
+                    <i class="fa-sharp fa-regular fa-pen-to-square" style="color: #0a0a0a;" (click)="editNote(note)"></i>
+                    <i class="fa-sharp fa-solid fa-trash" style="color: #0d0d0d;" (click)="deleteNote(note.id)" ></i>
+                  
+                </div>
+                 </div>
+    </ng-container>
+    </div>
+</ng-template>
+<div class="d-flex align-content-center justify-content-center py-5">
+    <i class="fa-sharp fa-solid fa-plus d-flex align-items-center justify-content-center" style="color: #f0f6ff;" (click)="addNote()"></i>
+</div>
+</div>
+
+
